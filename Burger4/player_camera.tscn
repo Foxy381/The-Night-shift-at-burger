@@ -1,0 +1,140 @@
+[gd_scene load_steps=12 format=3 uid="uid://cge563xssf8ug"]
+
+[ext_resource type="Script" uid="uid://cujgmmben1agy" path="res://Скрипты/player_camera.gd" id="1_u7d7q"]
+[ext_resource type="Script" uid="uid://cecrjwpna82ja" path="res://Скрипты/camera_3d.gd" id="2_taahg"]
+[ext_resource type="Script" uid="uid://b41v0r8b0cjt0" path="res://Скрипты/canvas_layer.gd" id="3_6e2h1"]
+[ext_resource type="Shader" uid="uid://gu6lisrg1sve" path="res://Shaber/ffff.gdshader" id="4_6e2h1"]
+[ext_resource type="Texture2D" uid="uid://bodou7htpobfx" path="res://Camera/dfdgdgggd.png" id="5_taahg"]
+[ext_resource type="Script" uid="uid://mlb460fb85jm" path="res://TEST ROOMS/texture_button.gd" id="6_6e2h1"]
+
+[sub_resource type="Animation" id="Animation_u7d7q"]
+resource_name = "up"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.04343, -0.200418), Vector3(0, 1.04343, -1.18918)]
+}
+
+[sub_resource type="Animation" id="Animation_taahg"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.04343, -0.200418)]
+}
+
+[sub_resource type="Animation" id="Animation_6e2h1"]
+resource_name = "Down"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.04343, -1.18918), Vector3(0, 1.043, -0.2)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6e2h1"]
+_data = {
+&"Down": SubResource("Animation_6e2h1"),
+&"RESET": SubResource("Animation_taahg"),
+&"up": SubResource("Animation_u7d7q")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_u7d7q"]
+shader = ExtResource("4_6e2h1")
+shader_parameter/fov = 0.32
+shader_parameter/stretch = Vector2(54, 28)
+
+[node name="Player_Camera" type="Node3D"]
+script = ExtResource("1_u7d7q")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.04343, -0.200418)
+script = ExtResource("2_taahg")
+
+[node name="Control" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 724.0
+
+[node name="Camera2D" type="Camera2D" parent="Camera3D/Control"]
+
+[node name="Node2D" type="Node2D" parent="Camera3D/Control"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+&"": SubResource("AnimationLibrary_6e2h1")
+}
+movie_quit_on_finish = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_6e2h1")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_u7d7q")
+offset_left = -661.0
+offset_top = -456.0
+offset_right = 1282.0
+offset_bottom = 1034.0
+mouse_filter = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureButton" type="TextureButton" parent="CanvasLayer"]
+custom_minimum_size = Vector2(0.23, 0)
+offset_left = 396.0
+offset_top = 651.0
+offset_right = 812.0
+offset_bottom = 701.0
+mouse_filter = 2
+texture_normal = ExtResource("5_taahg")
+script = ExtResource("6_6e2h1")
+
+[node name="Test Room" type="Node3D" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Test Room"]
+transform = Transform3D(1.83328, 0, 0, 0, 2.12135, 0, 0, 0, 1, 0.01063, 1.10679, -2.75757)
+size = Vector3(1.64246, 1, 0.101563)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Test Room"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.74585, 0)
+light_energy = 5.384
+spot_range = 4.74616
+spot_angle = 73.4388
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Test Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00869751, 1.08201, 0.384313)
+size = Vector3(3.01361, 2.11243, 0.0934753)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Test Room"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.42496, 1.09443, -1.22305)
+size = Vector3(3.10495, 2.13727, 0.0934753)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Test Room"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.45696, 1.09443, -1.22305)
+size = Vector3(3.10495, 2.13727, 0.0934753)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Test Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.574463, -0.238586, -1.32501)
+size = Vector3(4.60596, 0.522827, 6.1181)
+
+[connection signal="pressed" from="CanvasLayer/TextureButton" to="CanvasLayer/TextureButton" method="_on_texture_button_pressed"]

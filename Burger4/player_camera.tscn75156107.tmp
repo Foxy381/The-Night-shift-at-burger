@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://cge563xssf8ug"]
+
+[ext_resource type="Script" uid="uid://cujgmmben1agy" path="res://Скрипты/player_camera.gd" id="1_u7d7q"]
+[ext_resource type="Script" uid="uid://cecrjwpna82ja" path="res://Скрипты/camera_3d.gd" id="2_taahg"]
+[ext_resource type="Script" uid="uid://b41v0r8b0cjt0" path="res://Скрипты/canvas_layer.gd" id="3_6e2h1"]
+[ext_resource type="Texture2D" uid="uid://bodou7htpobfx" path="res://Camera/dfdgdgggd.png" id="5_taahg"]
+
+[node name="Player_Camera" type="Node3D"]
+script = ExtResource("1_u7d7q")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.29969, 0)
+script = ExtResource("2_taahg")
+
+[node name="Control" type="Control" parent="Camera3D"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1024.0
+offset_bottom = 724.0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="."]
+transform = Transform3D(1.83328, 0, 0, 0, 2.12135, 0, 0, 0, 1, 0, 1.10679, -2.75757)
+size = Vector3(1, 1, 0.101563)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_6e2h1")
+
+[node name="Dfdgdgggd" type="Sprite2D" parent="."]
+position = Vector2(521, 669)
+texture = ExtResource("5_taahg")
