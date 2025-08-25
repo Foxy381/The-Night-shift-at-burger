@@ -1,0 +1,67 @@
+[gd_scene load_steps=5 format=3 uid="uid://cvredwausrcy2"]
+
+[ext_resource type="Script" uid="uid://ctdlpmhnrqx1u" path="res://canvas_layer.gd" id="1_ke1gx"]
+[ext_resource type="Script" uid="uid://tj0jlv421pbo" path="res://gggg.gd" id="1_umanu"]
+[ext_resource type="Script" uid="uid://b41v0r8b0cjt0" path="res://Скрипты/canvas_layer.gd" id="3_soqg4"]
+[ext_resource type="Script" uid="uid://dgt7ww5oc1p8s" path="res://canvas_layer_3.gd" id="4_q2pqm"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_umanu")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("1_ke1gx")
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+script = ExtResource("3_soqg4")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.6
+autostart = true
+
+[node name="Node3D" type="Node3D" parent="."]
+
+[node name="Test Room" type="Node3D" parent="Node3D"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Node3D/Test Room"]
+transform = Transform3D(1.83328, 0, 0, 0, 2.12135, 0, 0, 0, 1, 0.01063, 1.10679, -2.75757)
+size = Vector3(1.64246, 1, 0.101563)
+
+[node name="SpotLight3D" type="SpotLight3D" parent="Node3D/Test Room"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.74585, 0)
+light_energy = 5.384
+spot_range = 4.74616
+spot_angle = 73.4388
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Node3D/Test Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00869751, 1.08201, 0.384313)
+size = Vector3(3.01361, 2.11243, 0.0934753)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Node3D/Test Room"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.42496, 1.09443, -1.22305)
+size = Vector3(3.10495, 2.13727, 0.0934753)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Node3D/Test Room"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 1.45696, 1.09443, -1.22305)
+size = Vector3(3.10495, 2.13727, 0.0934753)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Node3D/Test Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.574463, -0.238586, -1.32501)
+size = Vector3(4.60596, 0.522827, 6.1181)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Node3D/Test Room"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.02277, -1.31405)
+size = Vector3(4.60596, 0.522827, 6.1181)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(0.977445, -0.044279, -0.206496, 0.0198092, 0.992685, -0.119095, 0.210259, 0.112319, 0.971172, 0, 0.213921, -0.171527)
+
+[node name="CanvasLayer3" type="CanvasLayer" parent="."]
+script = ExtResource("4_q2pqm")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
